@@ -1,4 +1,6 @@
 import house.House;
+import task1.Car;
+import task1.Engine;
 
 import java.util.Random;
 
@@ -6,25 +8,76 @@ import java.util.Random;
 
 public class Hello {
 
+	public enum DayOfTheWeek {
+		MONDAY("test1"),
+		TUESDAY("test2"),
+		WEDNESDAY("test3"),
+		THURSDAY("test4"),
+		FRIDAY("test5"),
+		SATURDAY("test6"),
+		SUNDAY("test7");
 
-	public static void main(String[] args) {
+		private final String test;
 
-		House house = new House(1, 1, "black");
+		private DayOfTheWeek(String test) {
+			this.test = test;
+		}
 
-		House anotherHouse = new House();
+		public String getTest() {
+			return test;
+		}
+	}
 
-		House coloredHouse = new House("red");
 
-		house.printSomething("something");
+	public static void main(String[] args) throws Throwable {
 
-		house.setColor("blue");
-		System.out.println(house.getColor());
+		DayOfTheWeek day = DayOfTheWeek.FRIDAY;
 
-		System.out.println(house);
+		System.out.println(day.ordinal());
 
-		System.out.println(anotherHouse);
+//		System.out.println(day.getTest());
 
-		System.out.println(coloredHouse);
+		System.out.println(DayOfTheWeek.MONDAY.compareTo(DayOfTheWeek.SUNDAY));
+
+//
+//
+//		for(DayOfTheWeek day2 : DayOfTheWeek.values()){
+//			if(day2.ordinal() > 4)
+//				System.out.println(day2);
+//		}
+
+//		DayOfTheWeek day3 = DayOfTheWeek.valueOf("WEDNESDAY");
+//		System.out.println(day3);
+
+
+		Engine engine = new Engine(1, 2, "ASOM");
+
+
+		// .....
+
+		engine = null;
+
+
+//		Engine engine1 = new Engine(1, 1, "ASOM");
+//
+//		Car car = new Car(engine);
+//		Car car1 = new Car(engine1);
+//
+//		System.out.println(car);
+
+
+//		House coloredHouse = new House("red");
+//
+//		house.printSomething("something");
+//
+//		house.setColor("blue");
+//		System.out.println(house.getColor());
+//
+//		System.out.println(house);
+//
+//		System.out.println(anotherHouse);
+//
+//		System.out.println(coloredHouse);
 
 //		int[][] a = new int[4][5];
 //		int[][] b = new int[3][3];
@@ -43,6 +96,29 @@ public class Hello {
 //		printMatrix(b);
 //		printVectorSum(b);
 
+
+		//
+	}
+
+	private static String getDay(DayOfTheWeek day) {
+		switch (day) {
+			case MONDAY:
+				return "monday blabla";
+			case THURSDAY:
+				return "thursday blabla2";
+			case WEDNESDAY:
+				return "WEDNESDAY blabla2";
+			case TUESDAY:
+				return "TUESDAY blabla2";
+			case FRIDAY:
+				return "FRIDAY blabla2";
+			case SATURDAY:
+				return "SATURDAY blabla2";
+			case SUNDAY:
+				return "SUNDAY blabla2";
+			default:
+				return null;
+		}
 	}
 
 	static void sortMatrix(int[][] arr) {

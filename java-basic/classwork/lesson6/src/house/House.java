@@ -1,9 +1,15 @@
 package house;
 
+import cars.Car;
+
+import java.util.Objects;
+
 public class House {
-	private int length;      // длина дома (целочисленное)
+	private final int length;      // длина дома (целочисленное)
 	private int floors;      // количество этажей (целочисленное)
-	private String color;    // цвет дома (строка)
+	private String color;  // цвет дома (строка)
+
+	private Car car;
 
 	public House() {
 		this(10, 10, "white");
@@ -19,6 +25,7 @@ public class House {
 		this.length = length;
 		this.floors = floors;
 		this.color = color;
+		//this.car = new Car();
 	}
 
 	public void printSomething(String name) {
@@ -49,9 +56,40 @@ public class House {
 	@Override
 	public String toString() {
 		return "House{" +
-				", length=" + length +
+				"length=" + length +
 				", floors=" + floors +
 				", color='" + color + '\'' +
+				", car=" + car +
 				'}';
 	}
+
+	@Override
+	public void finalize() throws Throwable {
+		super.finalize();
+		System.out.println("END");
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || this.getClass() != o.getClass()) return false;
+		House house = (House) o;
+		return length == house.length && floors == house.floors && Objects.equals(color, house.color);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(length, floors, color, car);
+	}
+
+
+
+	/*
+	Реализовать два класса Car Engine
+	Полем класса Car является класс Engine
+    Поля класса Engine придумать самим (2 постоянных одно переменное)
+    Написать конструкторы сеттеры(где нужно) геттеры.
+    Переопределять equals hashcode toString
+    В мейне вызвать
+	 */
 }
