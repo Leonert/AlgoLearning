@@ -15,7 +15,7 @@ public class TableServlet extends HttpServlet {
   // http://localhost:8080/table
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    List<String> strings = Files.readAllLines(Paths.get("table.html"));
+    List<String> strings = Files.readAllLines(Paths.get("static-content/table.html"));
 
     try (PrintWriter w = resp.getWriter()) {
       strings.forEach(x -> w.println(x));
