@@ -10,6 +10,7 @@ public class ServerApp {
     ServletContextHandler handler = new ServletContextHandler();
     handler.addServlet(TableServlet.class, "/table");
     handler.addServlet(CssServlet.class, "/1.css");
+    handler.addServlet(ImgServlet.class, "/hp.jpg");
     server.setHandler(handler);
     server.start();
     server.join();

@@ -1,24 +1,26 @@
 package lesson2;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-public class TableServlet extends HttpServlet {
+public class ImgServlet extends HttpServlet {
 
-  // http://localhost:8080/table
+  // http://localhost:8080/
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    List<String> strings = Files.readAllLines(Paths.get("table.html"));
+    Path file = Paths.get("hp.jpg");
 
-    try (PrintWriter w = resp.getWriter()) {
-      strings.forEach(x -> w.println(x));
+    try (ServletOutputStream os = resp.getOutputStream()) {
+      Files.copy(file, os);
     }
   }
 
