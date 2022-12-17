@@ -22,7 +22,7 @@ public class SQLApp2 {
       stmt2.setString(2, "Jackson10");
       stmt2.setDate(3, Date.valueOf("2022-01-23"));
       stmt2.setInt(4, 20);
-      stmt2.execute();
+      stmt2.execute(); // -> id ???
 
       if (true) throw new RuntimeException("BOOM!");
 
