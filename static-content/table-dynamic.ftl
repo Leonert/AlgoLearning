@@ -30,5 +30,17 @@
         </#list>
         </tbody>
     </table>
+    <form action="/addimage" method="POST">
+        <button>Add image</button>
+        <button formaction="/home" formmethod="get">Cancel</button>
+        <button formaction="/logout" formmethod="post">Logout</button>
+    </form>
+
+    <form action="/like" method="POST">
+        <button formaction="/logout" formmethod="post">Logout</button>
+    </form>
+    <form action="/dislike" method="POST">
+        <button formaction="/logout" formmethod="post">Logout</button>
+    </form>
 </body>
 </html>
