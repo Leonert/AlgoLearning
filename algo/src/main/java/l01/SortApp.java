@@ -1,9 +1,8 @@
 package l01;
 
 import java.util.Arrays;
-import java.util.function.IntSupplier;
+import java.util.Comparator;
 import java.util.function.IntUnaryOperator;
-import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 import java.util.stream.Stream;
 
@@ -30,11 +29,49 @@ public class SortApp {
             }
     }
 
+    public static <A> void sortGen(A[] xs, Comparator<A> cmp) {
+        for (int i=0; i< xs.length; i++)
+            for (int j=i+1; j < xs.length; j++) {
+                System.out.printf("i:%d xs[%d]:%s j:%d xs[%d]:%s", i, i, xs[i], j, j, xs[j]);
+                accessCount++;
+                if (cmp.compare(xs[i], xs[j]) > 0) {
+                    System.out.println("-- swapping");
+                    A x = xs[i];
+                    xs[i] = xs[j];
+                    xs[j] = x;
+                    System.out.println(Arrays.toString(xs));
+                    swapCount++;
+                } else {
+                    System.out.println("-- skipping");
+                }
+
+            }
+    }
+
+    public static <A extends Comparable<A>> void sortGen(A[] xs) {
+        for (int i=0; i< xs.length; i++)
+            for (int j=i+1; j < xs.length; j++) {
+                System.out.printf("i:%d xs[%d]:%s j:%d xs[%d]:%s", i, i, xs[i], j, j, xs[j]);
+                accessCount++;
+                if (xs[i].compareTo(xs[j]) > 0) {
+                    System.out.println(" -- swapping");
+                    A x = xs[i];
+                    xs[i] = xs[j];
+                    xs[j] = x;
+                    System.out.println(Arrays.toString(xs));
+                    swapCount++;
+                } else {
+                    System.out.println(" -- skipping");
+                }
+
+            }
+    }
+
     public static int inc(int x) {
         return x + 1;
     }
 
-    public static void main(String[] args) {
+    public static void main1(String[] args) {
         IntUnaryOperator adder1 = new IntUnaryOperator() {
             @Override
             public int applyAsInt(int x) {
@@ -68,6 +105,50 @@ public class SortApp {
         System.out.println(Arrays.toString(random));
         System.out.printf("AccessCount: %d\n", accessCount);
         System.out.printf("SwapCount: %d\n", swapCount);
+    }
+
+    static class Pizza implements Comparable<Pizza>{
+        int size;
+
+        public Pizza(int size) {
+            this.size = size;
+        }
+
+        @Override
+        public String toString() {
+            return "Pizza{" +
+                    "size=" + size +
+                    '}';
+        }
+
+        @Override
+        public int compareTo(Pizza that) {
+            return Integer.compare(this.size, that.size);
+        }
+    }
+
+    public static void main(String[] args) {
+        Pizza[] pizzas = {new Pizza(100), new Pizza(10), new Pizza(20)};
+        Comparator<Pizza> pc = new Comparator<Pizza>() {
+            @Override
+            public int compare(Pizza o1, Pizza o2) {
+                return Integer.compare(o1.size, o2.size);
+            }
+        };
+        System.out.println(Arrays.toString(pizzas));
+        sortGen(pizzas); // by compareTo (Pizza implements Comparable<Pizza>)
+        sortGen(pizzas, pc); // by ANY comparator provided
+        System.out.println(Arrays.toString(pizzas));
+    }
+
+    // a - sorted
+    // b - sorted
+    // c - must be sorted
+    // O(a.length + b.length)
+    public int[] merge(int[] a, int[] b) {
+        int[] c = new int[a.length + b.length];
+        // ...
+        return c;
     }
 
 }
