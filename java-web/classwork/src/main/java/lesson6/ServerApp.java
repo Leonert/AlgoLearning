@@ -6,6 +6,7 @@ import org.eclipse.jetty.servlet.ServletHolder;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.function.Function;
 
 public class ServerApp {
 
@@ -15,11 +16,11 @@ public class ServerApp {
   // http://localhost:8080/calc?x=1&y=6
   // http://localhost:8080/history
   public static void main(String[] args) throws Exception {
-    Connection conn = DriverManager.getConnection(
-        "jdbc:postgresql://localhost:5432/fs1",
-        "postgres",
-        "pg123456"
-    );
+
+    // ANTI-PATTERN !!!!
+    Connection conn = GlobalSQLConnection.get();
+    // ANTI-PATTERN !!!!
+    Connection conn2 = GlobalSQLConnection.get();
 
     Server server = new Server(8080);
 
