@@ -218,7 +218,26 @@ public class XLinkedList {
 //  }
 
   public void reverse() {
-    throw new IllegalStateException("to implement");
+    Node curr = head;
+    Node prev = null;
+    while (curr != null) {
+      Node savedNext = curr.next;
+      curr.next = prev;
+      prev = curr;      // pos change
+      curr = savedNext; // pos change
+    }
+    head = prev;
+  }
+
+  public Node reverseR(Node curr, Node prev) {
+    if (curr == null) return prev;
+    Node savedNext = curr.next;
+    curr.next = prev;
+    return reverseR(savedNext, curr);
+  }
+
+  public void reverseR() {
+    head = reverseR(head, null);
   }
 
 

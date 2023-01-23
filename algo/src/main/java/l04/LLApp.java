@@ -12,6 +12,10 @@ public class LLApp {
     ll.addHead(7); // 7, 5, 1
     ll.addAfter(11, x -> x == 5); // 7, 5, 11, 1
     System.out.println(ll);
+    ll.reverse();                   // 1, 11, 5, 7
+    System.out.println(ll);
+//    ll.reverseR();                  // 7, 5, 11, 1
+//    System.out.println(ll);
   }
 
 }
