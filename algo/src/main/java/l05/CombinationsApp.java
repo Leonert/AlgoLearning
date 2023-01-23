@@ -7,6 +7,10 @@ import java.util.stream.Stream;
 
 public class CombinationsApp {
 
+  public static List<String> comb3(List<String> prev) {
+    throw new IllegalStateException();
+  }
+
   // "0"+ every item
   // "1"+ every item
   public static List<String> comb(int n) {
