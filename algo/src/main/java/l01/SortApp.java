@@ -7,80 +7,22 @@ import java.util.function.UnaryOperator;
 import java.util.stream.Stream;
 
 public class SortApp {
-
     static int accessCount = 0;
+
     static int swapCount = 0;
-    public static void sort(int[] xs) {
-        for (int i=0; i< xs.length; i++)
-            for (int j=i+1; j < xs.length; j++) {
-                System.out.printf("i:%d xs[%d]:%d j:%d xs[%d]:%d", i, i, xs[i], j, j, xs[j]);
-                accessCount++;
-                if (xs[i] > xs[j]) {
-                    System.out.println("-- swapping");
-                    int x = xs[i];
-                    xs[i] = xs[j];
-                    xs[j] = x;
-                    System.out.println(Arrays.toString(xs));
-                    swapCount++;
-                } else {
-                    System.out.println("-- skipping");
-                }
 
-            }
-    }
-
-    public static <A> void sortGen(A[] xs, Comparator<A> cmp) {
-        for (int i=0; i< xs.length; i++)
-            for (int j=i+1; j < xs.length; j++) {
-                System.out.printf("i:%d xs[%d]:%s j:%d xs[%d]:%s", i, i, xs[i], j, j, xs[j]);
-                accessCount++;
-                if (cmp.compare(xs[i], xs[j]) > 0) {
-                    System.out.println("-- swapping");
-                    A x = xs[i];
-                    xs[i] = xs[j];
-                    xs[j] = x;
-                    System.out.println(Arrays.toString(xs));
-                    swapCount++;
-                } else {
-                    System.out.println("-- skipping");
-                }
-
-            }
-    }
-
-    public static <A extends Comparable<A>> void sortGen(A[] xs) {
-        for (int i=0; i< xs.length; i++)
-            for (int j=i+1; j < xs.length; j++) {
-                System.out.printf("i:%d xs[%d]:%s j:%d xs[%d]:%s", i, i, xs[i], j, j, xs[j]);
-                accessCount++;
-                if (xs[i].compareTo(xs[j]) > 0) {
-                    System.out.println(" -- swapping");
-                    A x = xs[i];
-                    xs[i] = xs[j];
-                    xs[j] = x;
-                    System.out.println(Arrays.toString(xs));
-                    swapCount++;
-                } else {
-                    System.out.println(" -- skipping");
-                }
-
-            }
-    }
-
-    public static int inc(int x) {
-        return x + 1;
-    }
-
-    public static void main1(String[] args) {
+    public static void main(String[] args) {
         IntUnaryOperator adder1 = new IntUnaryOperator() {
             @Override
             public int applyAsInt(int x) {
-                return x+1;
+                return x + 1;
             }
         };
         IntUnaryOperator adder2 = (int x) -> x + 1;
         UnaryOperator<Integer> adder2a = (Integer x) -> x + 1;
-        IntUnaryOperator adder3 = (int x) -> { return x + 1; };
+        IntUnaryOperator adder3 = (int x) -> {
+            return x + 1;
+        };
         IntUnaryOperator adder4 = x -> x + 1;
 
 //        int[] n = {50};
@@ -107,7 +49,68 @@ public class SortApp {
         System.out.printf("SwapCount: %d\n", swapCount);
     }
 
-    static class Pizza implements Comparable<Pizza>{
+    public static void sort(int[] xs) {
+        for (int i = 0; i < xs.length; i++)
+            for (int j = i + 1; j < xs.length; j++) {
+                System.out.printf("i:%d xs[%d]:%d j:%d xs[%d]:%d", i, i, xs[i], j, j, xs[j]);
+                accessCount++;
+                if (xs[i] > xs[j]) {
+                    System.out.println("-- swapping");
+                    int x = xs[i];
+                    xs[i] = xs[j];
+                    xs[j] = x;
+                    System.out.println(Arrays.toString(xs));
+                    swapCount++;
+                } else {
+                    System.out.println("-- skipping");
+                }
+
+            }
+    }
+
+    public static <A> void sortGen(A[] xs, Comparator<A> cmp) {
+        for (int i = 0; i < xs.length; i++)
+            for (int j = i + 1; j < xs.length; j++) {
+                System.out.printf("i:%d xs[%d]:%s j:%d xs[%d]:%s", i, i, xs[i], j, j, xs[j]);
+                accessCount++;
+                if (cmp.compare(xs[i], xs[j]) > 0) {
+                    System.out.println("-- swapping");
+                    A x = xs[i];
+                    xs[i] = xs[j];
+                    xs[j] = x;
+                    System.out.println(Arrays.toString(xs));
+                    swapCount++;
+                } else {
+                    System.out.println("-- skipping");
+                }
+
+            }
+    }
+
+    public static <A extends Comparable<A>> void sortGen(A[] xs) {
+        for (int i = 0; i < xs.length; i++)
+            for (int j = i + 1; j < xs.length; j++) {
+                System.out.printf("i:%d xs[%d]:%s j:%d xs[%d]:%s", i, i, xs[i], j, j, xs[j]);
+                accessCount++;
+                if (xs[i].compareTo(xs[j]) > 0) {
+                    System.out.println(" -- swapping");
+                    A x = xs[i];
+                    xs[i] = xs[j];
+                    xs[j] = x;
+                    System.out.println(Arrays.toString(xs));
+                    swapCount++;
+                } else {
+                    System.out.println(" -- skipping");
+                }
+
+            }
+    }
+
+    public static int inc(int x) {
+        return x + 1;
+    }
+
+    static class Pizza implements Comparable<Pizza> {
         int size;
 
         public Pizza(int size) {
@@ -127,7 +130,7 @@ public class SortApp {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main1(String[] args) {
         Pizza[] pizzas = {new Pizza(100), new Pizza(10), new Pizza(20)};
         Comparator<Pizza> pc = new Comparator<Pizza>() {
             @Override
