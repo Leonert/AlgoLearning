@@ -150,7 +150,15 @@ public class SortApp {
     // O(a.length + b.length)
     public int[] merge(int[] a, int[] b) {
         int[] c = new int[a.length + b.length];
-        // ...
+        int i = 0; // a
+        int j = 0; // b
+        int k = 0; // c
+        while (i < a.length && j < b.length) {
+            c[k++] = a[i] < b[j] ? a[i++] : b[j++];
+        }
+        while (i < a.length) c[k++] = a[i++];
+        while (j < b.length) c[k++] = b[j++];
+
         return c;
     }
 
